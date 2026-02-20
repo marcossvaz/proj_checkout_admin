@@ -1,0 +1,15 @@
+services:  
+  db:
+    image: postgres
+    container_name: BD-checkout
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: my-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes: 
+  postgres_data:
