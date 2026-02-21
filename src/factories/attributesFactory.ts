@@ -5,6 +5,7 @@ import { AttributesServices } from "../services/attributesService.js";
 // prisma
 export const AttributeRepositoryFactory = new AttributeRepository()
 export const ValueAttributeRepositoryFactory = new ValueAttributeRepository()
+
 // this a factories of service
 export const AttributesServicesFactory = new AttributesServices(
     AttributeRepositoryFactory,

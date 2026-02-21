@@ -1,4 +1,4 @@
-import type { IAddAttribute } from "../controllers/schemas/attributesSchema.js";
+import type { IAddAttribute, IAddValue } from "../controllers/schemas/attributesSchema.js";
 import type { AttributeRepository } from "../repositories/attributesRepository.js";
 import type { ValueAttributeRepository } from "../repositories/valueAttributeReposiitory.js";
 
@@ -34,5 +34,10 @@ export class AttributesServices {
         console.log(returns);
 
         return returns;
+    }
+
+    async addValueAttribute(data: IAddValue, id_attribute: string) {
+        this.attributeValueRepository.add([{...data, id_attribute}]);
+        return await this.attributeValueRepository.getValueAttributeById(id_attribute)
     }
 }
