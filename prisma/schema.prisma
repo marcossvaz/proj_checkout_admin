@@ -19,15 +19,14 @@ model Attribute {
   updated_at DateTime @updatedAt
 
   value_attribute AttributeValue[]
-
 }
 
 model AttributeValue {
-  id String @id @default(uuid())
+  id           String   @id @default(uuid())
   id_attribute String
-  value Float
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  value        String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 
   attribute Attribute @relation(fields: [id_attribute], references: [id])
 

@@ -1,6 +1,6 @@
 export interface Attribute {
-    id: string;
+    id?: string;
     name: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: any;
+    updated_at?: any;
 }

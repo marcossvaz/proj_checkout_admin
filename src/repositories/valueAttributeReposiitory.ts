@@ -2,7 +2,6 @@ import { PrismaFactory } from "../factories/prismaFactory.js";
 import type { ValueAttributes } from "../models/ValueAttributes.js";
 
 
-
 export class ValueAttributeRepository {
     
     
@@ -19,5 +18,12 @@ export class ValueAttributeRepository {
             }
         });
     } 
+    
+    async editValueAttribute(data: Partial<ValueAttributes>, id: string) {
+        return await PrismaFactory.attributeValue.update({
+            where: { id },
+            data: data
+        })
+    }
 
 }

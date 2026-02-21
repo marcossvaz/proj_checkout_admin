@@ -1,4 +1,4 @@
-import type { IAddAttribute, IAddValue } from "../controllers/schemas/attributesSchema.js";
+import type { IAddAttribute, IAddValue,  IEditAttribute, IEditValueAttribute} from "../controllers/schemas/attributesSchema.js";
 import type { AttributeRepository } from "../repositories/attributesRepository.js";
 import type { ValueAttributeRepository } from "../repositories/valueAttributeReposiitory.js";
 
@@ -38,6 +38,14 @@ export class AttributesServices {
 
     async addValueAttribute(data: IAddValue, id_attribute: string) {
         this.attributeValueRepository.add([{...data, id_attribute}]);
-        return await this.attributeValueRepository.getValueAttributeById(id_attribute)
+        return await this.attributeValueRepository.getValueAttributeById(id_attribute);
     }
-}
+
+    async editedAttribute(data: IEditAttribute, id_attribute: string) {
+        return await this.attributeRepository.edit(data, id_attribute);
+    }
+
+    async editValueAttribute(data: IEditValueAttribute, id_value_attribute: string) {
+        return await this.attributeValueRepository.editValueAttribute(data, id_value_attribute);
+    }
+}  
