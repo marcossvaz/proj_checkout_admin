@@ -9,3 +9,4 @@ routesAttributes.post('/attributes', attributesController.add);
 routesAttributes.post('/attributes/valueAttribute/:id', attributesController.addValuesAttribute);
 routesAttributes.patch('/attribute/:id', attributesController.editAttribute);
 routesAttributes.patch('/attributes/value/:id', attributesController.editValueAttribute);
+routesAttributes.get('/attributes', attributesController.getAllAttributes);

@@ -48,4 +48,8 @@ export class AttributesServices {
     async editValueAttribute(data: IEditValueAttribute, id_value_attribute: string) {
         return await this.attributeValueRepository.editValueAttribute(data, id_value_attribute);
     }
+
+    async getAll() {
+        return await this.attributeRepository.getAlls();
+    }
 }  

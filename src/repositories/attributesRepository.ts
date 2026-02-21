@@ -17,4 +17,12 @@ export class AttributeRepository {
             data: data
         })
     }
+
+    async getAlls() {
+        return await PrismaFactory.attribute.findMany({
+            include: {
+                value_attribute: true
+            }
+        })
+    }
 }

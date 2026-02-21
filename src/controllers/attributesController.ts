@@ -72,4 +72,13 @@ export class AttributesController {
         }
     }
 
+    async getAllAttributes(req: Request, res: Response) {
+        try {
+            const returns = await AttributesServicesFactory.getAll();
+
+            res.status(201).json(returns);
+        } catch (err: any) {
+            res.status(400).json({error: err.message})
+        }
+    }
 }
