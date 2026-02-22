@@ -10,7 +10,8 @@ export class AttributesServices {
 
 
     async add(data: IAddAttribute) {
-        const attributeAdded = await this.attributeRepository.add(data.name);
+        const payLoadAddAttribute = { active: data.active ?? null, name: data.name };
+        const attributeAdded = await this.attributeRepository.add(payLoadAddAttribute);
 
         const returns = {
             attribute: attributeAdded,
@@ -51,5 +52,13 @@ export class AttributesServices {
 
     async getAll() {
         return await this.attributeRepository.getAlls();
+    }
+
+    async deleteAttribute(id: string) {
+        return await this.attributeRepository.delete(id);
+    }
+
+    async deleteAttributeValue(id: string) {
+        return await this.attributeValueRepository.deleteAttributeValue(id);
     }
 }  

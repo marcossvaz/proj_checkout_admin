@@ -13,8 +13,10 @@ datasource db {
 }
 
 model Attribute {
-  id         String   @id @default(uuid())
-  name       String
+  id     String   @id @default(uuid())
+  name   String
+  active Boolean?
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -25,6 +27,8 @@ model AttributeValue {
   id           String   @id @default(uuid())
   id_attribute String
   value        String
+  active       Boolean?
+
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
 

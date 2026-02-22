@@ -1,7 +1,8 @@
-import { string, object, array, type InferType, number, date } from 'yup';
+import { string, object, array, type InferType, number, date, boolean } from 'yup';
 
 export const addSchema = object().shape({
     name: string().required("O nome é obrigatório"),
+    active: boolean().nullable(),
     values: array(object().shape({
         value: string().required("Defina o nome para o atributo")
     })).nullable()
@@ -17,6 +18,10 @@ export const editAttributeSchema = object().shape({
 
 export const editValueAttribute = object().shape({
     value: string().required("o nome do valor é requerido")
+})
+
+export const deleteAttribute = object().shape({
+    
 })
 
 

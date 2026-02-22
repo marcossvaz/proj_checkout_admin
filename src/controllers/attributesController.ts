@@ -58,7 +58,7 @@ export class AttributesController {
         }
     }
 
-    async editValueAttribute(req: Request<{id: string}>, res: Response) {
+    async editValueAttribute(req: Request<{ id: string }>, res: Response) {
         try {
             const body = await editValueAttribute.validate(req.body);
             const { id } = req.params;
@@ -72,13 +72,40 @@ export class AttributesController {
         }
     }
 
-    async getAllAttributes(req: Request, res: Response) {
+    async getAllAttributes(_req: Request, res: Response) {
         try {
             const returns = await AttributesServicesFactory.getAll();
 
             res.status(201).json(returns);
         } catch (err: any) {
-            res.status(400).json({error: err.message})
+            res.status(400).json({ error: err.message });
+        }
+    }
+
+    async deleteAttribute(req: Request<{ id: string }>, res: Response) {
+        try {
+            const { id } = req.params;
+            if (!id) { throw new Error("registro não encontrado"); }
+
+            const result = await AttributesServicesFactory.deleteAttribute(id);
+
+            res.status(201).json(result)
+
+        } catch (err: any) {
+            res.status(401).json({ error: err.message });
+        }
+    }
+
+    async deleteAttributeValue(req: Request<{id: string}>, res: Response) {
+        try {
+            const { id } = req.params;
+            if (!id) throw new Error("Registro não foi achado");
+            
+            const returns = await AttributesServicesFactory.deleteAttributeValue(id);
+            
+            res.status(200).json(returns);
+        } catch (err: any) {
+            res.status(400).json({ error: err.message });
         }
     }
 }

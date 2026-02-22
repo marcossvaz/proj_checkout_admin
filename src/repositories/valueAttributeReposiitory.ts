@@ -26,4 +26,15 @@ export class ValueAttributeRepository {
         })
     }
 
+    async deleteAttributeValue(id: string) {
+        return await PrismaFactory.attributeValue.update({
+            where: {
+                id
+            },
+            data: {
+                active: false
+            }
+        })
+    }
+
 }

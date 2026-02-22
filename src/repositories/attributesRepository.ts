@@ -3,9 +3,9 @@ import type { Attribute } from "../models/Attributes.js";
 
 export class AttributeRepository {
 
-    async add(name:string) {
+    async add(data: Attribute) {
         return await PrismaFactory.attribute.create({
-            data: { name }
+            data: data 
         });
     }
 
@@ -20,9 +20,25 @@ export class AttributeRepository {
 
     async getAlls() {
         return await PrismaFactory.attribute.findMany({
+            where: {
+                active: true
+            },
             include: {
-                value_attribute: true
+                value_attribute: {
+                    where: {
+                        active: true
+                    }
+                }
             }
         })
+    }
+
+    async delete(id: string) {
+        return await PrismaFactory.attribute.update({
+            where: { id },
+            data: {
+                active: false
+            }
+        });
     }
 }
