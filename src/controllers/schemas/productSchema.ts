@@ -12,6 +12,10 @@ export const editProductSchema = object().shape({
     description: string().nullable(),
 })
 
+export const editActiveProductSchema = object().shape({
+    active: boolean().required()
+})
+
 
 export type IAddProducts = InferType<typeof addProductSchema>;
 export type IEditProducts = InferType<typeof editProductSchema>;

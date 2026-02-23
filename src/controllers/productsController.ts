@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { addProductSchema, editProductSchema } from "./schemas/productSchema.js";
 import { ProductServiceFactory } from "../factories/productFactort.js";
+import { UuIdValidationSchema } from "../factories/globalSchema.js";
 
 export class ProductsController {
 
@@ -20,12 +21,25 @@ export class ProductsController {
     async editProduct(req: Request<{ id: string }>, res: Response) {
         try {
             const { id } = req.params;
-            if (!id) throw new Error("O registro não foi encontrado");
+            UuIdValidationSchema.validate(id);
 
             const body = await editProductSchema.validate(req.body);
 
             const result = await ProductServiceFactory.editProduct(id, body);
             res.status(200).json(result);
+        } catch (err: any) {
+            res.status(400).json({ error: err.message });
+        }
+    }
+
+    async deleteProduct(req: Request<{id: string}>, res: Response) {
+        try {
+            const { id } = req.params;
+            UuIdValidationSchema.validate(id);
+
+            const result = await ProductServiceFactory.deleteProduct(id);
+
+            res.status(201).json(result);
         } catch (err: any) {
             res.status(400).json({ error: err.message });
         }

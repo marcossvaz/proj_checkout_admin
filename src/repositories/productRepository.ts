@@ -23,4 +23,13 @@ export class ProductRepository {
             }
         })
     }
+
+    async deleteProduct(id: string) {
+        return await PrismaFactory.product.update({
+            where: { id },
+            data: {
+                active: false
+            }
+        })
+    }
 }

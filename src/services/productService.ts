@@ -18,4 +18,9 @@ export class ProductService {
         return productEdit;
     }
 
+    async deleteProduct(id: string) {
+        const productDelete = await this.productRepository.deleteProduct(id);
+
+        return productDelete;
+    }
 }
