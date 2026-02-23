@@ -5,7 +5,10 @@ export interface Variants {
     price: number;
     weight: number;
     volume: string;
+    active?: boolean;
+    
     json_feature: any;
+
     created_at: Date;
     updated_at: Date;
 }
