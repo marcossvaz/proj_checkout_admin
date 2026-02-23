@@ -29,10 +29,19 @@ model AttributeValue {
   value        String
   active       Boolean?
 
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   attribute Attribute @relation(fields: [id_attribute], references: [id])
 
   @@map("attributes_values")
+}
+
+model Category {
+  id     String  @id @default(uuid())
+  name   String
+  active Boolean
+  
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
