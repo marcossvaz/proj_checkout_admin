@@ -1,4 +1,4 @@
-import type { IAddProducts } from "../controllers/schemas/productSchema.js";
+import type { IAddProducts, IEditProducts } from "../controllers/schemas/productSchema.js";
 import type { ProductRepository } from "../repositories/productRepository.js";
 
 export class ProductService {
@@ -10,6 +10,12 @@ export class ProductService {
         console.log(productAdded);
 
         return productAdded;
+    }
+
+    async editProduct(id: string, data: IEditProducts) {
+        const productEdit = await this.productRepository.edit(id, data);
+
+        return productEdit;
     }
 
 }

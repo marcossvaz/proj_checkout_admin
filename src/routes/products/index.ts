@@ -6,3 +6,4 @@ export const routesProduct = Router();
 const productsController = new ProductsController();
 
 routesProduct.post('/products', productsController.add);
+routesProduct.patch('/products/:id', productsController.editProduct);

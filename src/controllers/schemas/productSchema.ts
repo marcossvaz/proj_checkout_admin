@@ -7,12 +7,11 @@ export const addProductSchema = object().shape({
     active : boolean().required(),
 })
 
-export const EdditProductSchema = object().shape({
-    id_category: string().required(),
+export const editProductSchema = object().shape({
     name: string().required("O nome do produto é obrigatório para edição"),
     description: string().nullable(),
-    active: boolean().required(),
 })
 
 
 export type IAddProducts = InferType<typeof addProductSchema>;
+export type IEditProducts = InferType<typeof editProductSchema>;
