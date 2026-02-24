@@ -12,6 +12,10 @@ export class ProductService {
         return productAdded;
     }
 
+    async getAll() {
+        return await this.productRepository.getAll();
+    }
+
     async editProduct(id: string, data: IEditProducts) {
         const productEdit = await this.productRepository.edit(id, data);
 

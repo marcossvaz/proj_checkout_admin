@@ -18,6 +18,16 @@ export class ProductsController {
 
     }
 
+    async getAll(_req: Request, res: Response) {
+       try {
+           const result = await ProductServiceFactory.getAll();
+
+           res.status(200).json(result);
+       } catch (err: any) {
+           res.status(401).json({ error: err.message });
+       }
+    }
+
     async editProduct(req: Request<{ id: string }>, res: Response) {
         try {
             const { id } = req.params;

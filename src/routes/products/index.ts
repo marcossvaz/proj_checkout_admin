@@ -8,3 +8,4 @@ const productsController = new ProductsController();
 routesProduct.post('/products', productsController.add);
 routesProduct.patch('/products/:id', productsController.editProduct);
 routesProduct.delete('/products/:id', productsController.deleteProduct);
+routesProduct.get('/products', productsController.getAll);

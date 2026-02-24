@@ -9,7 +9,7 @@ export class ProductRepository {
                 id_category: data.id_category,
                 name: data.name,
                 description: data.description ?? null,
-                active: data.active
+                active: data.active,
             }
         })
     }
@@ -31,5 +31,13 @@ export class ProductRepository {
                 active: false
             }
         })
+    }
+
+    async getAll() {
+        return await PrismaFactory.product.findMany({
+            where: {
+                active: true
+            }
+        });
     }
 }
