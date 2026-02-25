@@ -41,7 +41,7 @@ model Category {
   id     String  @id @default(uuid())
   name   String
   active Boolean
-  
+
   products Product[]
 
   created_at DateTime @default(now())
@@ -49,15 +49,39 @@ model Category {
 }
 
 model Product {
-  id String @id @default(uuid())
-  name String
+  id          String  @id @default(uuid())
+  name        String
   description String?
-  active Boolean
+  active      Boolean
+
+  variants Variants[]
 
   id_category String
-  category Category @relation(fields: [id_category], references: [id])
+  category    Category @relation(fields: [id_category], references: [id])
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
 
+model Variants {
+  id     String   @id @default(uuid())
+  sku    String
+  price  Float
+  stock  Float
+  active Boolean?
+  combo  Boolean
+  value Float?
+
+  id_product String
+  product    Product @relation(fields: [id_product], references: [id])
+
+  height Float
+  width  Float
+  weight Float
+  length Float
+
+  json_feature Json
+  main         Boolean
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}

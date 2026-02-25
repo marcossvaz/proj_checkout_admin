@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { addProductSchema, editProductSchema } from "./schemas/productSchema.js";
-import { ProductServiceFactory } from "../factories/productFactort.js";
+import { ProductServiceFactory } from "../factories/productFactory.js";
 import { UuIdValidationSchema } from "../factories/globalSchema.js";
 
 export class ProductsController {
