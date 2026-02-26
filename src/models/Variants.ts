@@ -1,10 +1,10 @@
 export interface Variants {
-    id?: string;
+    id: string;
     id_product: string;
     sku: string;
     price: number;
     stock: number;
-    active?: boolean;
+    active?: boolean | null;
     combo: boolean;
 
     height: number;

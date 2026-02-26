@@ -3,7 +3,7 @@ import { array, boolean, number, object, string, type InferType } from "yup";
 export const addVariants = array().of(
     object({
         sku: string().required("SKU é obrigatório"),
-        attributeValue: array().of(string()),
+        attributeValue: array().of(string().required()).nullable(),
         price: number().required("O valor é obrigatório"),
         weight: number().required(),
         height: number().required(),

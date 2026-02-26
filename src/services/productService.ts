@@ -1,21 +1,22 @@
 import type { IAddProducts, IAddVariants, IEditProducts } from "../controllers/schemas/productSchema.js";
 import type { Variants } from "../models/Variants.js";
 import type { ProductRepository } from "../repositories/productRepository.js";
-import type { VariantsRepository } from "../repositories/variantsRepository.js";
+import type { VariantsService } from "./variantsService.js";
 
 export class ProductService {
     constructor(
         private readonly productRepository: ProductRepository,
-        private readonly variantsRepository: VariantsRepository
+        private readonly variantsService: VariantsService
+
     ) { };
 
     async add(data: IAddProducts) {
-        // add product
+        // added product
         const productAdded = await this.productRepository.add(data);
 
         // linked variant of product into product
         if (data.variants) {
-            const variants: Variants[] = data.variants.map(variant => ({
+            const variants = data.variants.map(variant => ({
                 id_product: productAdded.id,
                 sku: variant.sku,
                 price: variant.price,
@@ -26,18 +27,44 @@ export class ProductService {
                 width: variant.width,
                 length: variant.length,
                 weight: variant.weight,
-                value: variant.value,
+                value: variant.value || null,
                 json_feature: variant.json_feature ?? null,
                 main: variant.main,
-            })) 
+            }));
 
-            await this.variantsRepository.add(variants);
-            console.log(variants)
+            await this.variantsService.add(variants);
+            console.log(variants);
         }
 
-        console.log(data.variants);
+        const variantsProduct = await this.variantsService.getAll(productAdded.id);
+        const payloadVariantValue = this.orderPayloadAddValueVariant(variantsProduct, data.variants);
 
-        return productAdded;
+        const variantValuesAdded = await this.variantsService.addValueVariants(payloadVariantValue);
+
+        console.log(variantValuesAdded);
+        console.log(data.variants);
+        console.log(variantsProduct);
+        return {
+            ...productAdded,
+            variants: variantsProduct
+            
+        };
+    }
+
+    orderPayloadAddValueVariant(variantProduct: Variants[], data: IAddVariants) {
+        return variantProduct.flatMap((variant) => {
+            const variantCorrespondFront = data?.find(item => item.sku === variant.sku);
+
+            if (variantCorrespondFront && variantCorrespondFront.attributeValue) {
+                return variantCorrespondFront.attributeValue.map(variantFront => ({
+                    id_value_attribute: variantFront,
+                    id_variant: variant.id,
+                    active: true
+                }))
+            }
+
+            return [];
+        })
     }
 
     async getAll() {

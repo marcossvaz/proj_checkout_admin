@@ -1,7 +1,8 @@
 export interface VariantValue {
-    id: string;
+    id?: string;
     id_value_attribute: string;
-    id_value: string;
-    created_at: Date;
-    updated_at: Date;
+    id_variant: string;
+    active: boolean;
+    created_at?: any;
+    updated_at?: any;
 }

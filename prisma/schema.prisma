@@ -70,18 +70,32 @@ model Variants {
   stock  Float
   active Boolean?
   combo  Boolean
-  value Float?
+  value  Float?
 
   id_product String
   product    Product @relation(fields: [id_product], references: [id])
+
+  value_variants VariantsValue[]
 
   height Float
   width  Float
   weight Float
   length Float
 
-  json_feature Json
-  main         Boolean
-  created_at   DateTime @default(now())
-  updated_at   DateTime @updatedAt
+  json_feature    Json
+  main            Boolean
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+}
+
+model VariantsValue {
+  id                 String  @id @default(uuid())
+  id_value_attribute String
+  active             Boolean
+
+  id_variant String
+  variant    Variants @relation(fields: [id_variant], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
