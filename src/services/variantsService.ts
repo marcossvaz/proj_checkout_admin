@@ -30,4 +30,8 @@ export class VariantsService {
     async getAll(id_product: string) {
         return await this.variantsRepository.getAll(id_product);
     }
+
+    async deleteVariantValue(id:string) {
+        return await this.variantValueRepository.deleteVariantValue(id)
+    }
 }

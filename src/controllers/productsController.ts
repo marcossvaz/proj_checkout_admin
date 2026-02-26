@@ -83,4 +83,17 @@ export class ProductsController {
             res.status(400).json({ error: err.message });
         }
     }
+
+
+    async deleteVariantValue(req: Request, res: Response) {
+        try {
+            const idIsValidated = await UuIdValidationSchema.validate(req.params.id);
+
+            const result = await ProductServiceFactory.deleteValueVariant(idIsValidated);
+
+            res.status(200).json(result);
+        } catch (err: any) {
+            res.status(400).json({ error: err.message });
+        }
+    }
 }

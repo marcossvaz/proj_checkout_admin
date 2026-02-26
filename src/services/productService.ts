@@ -94,4 +94,10 @@ export class ProductService {
 
         return variantDelete;
     }
+
+    async deleteValueVariant(id: string) {
+        const variantValueVariant = await this.variantsService.deleteVariantValue(id);
+        
+        return variantValueVariant;
+    }
 }

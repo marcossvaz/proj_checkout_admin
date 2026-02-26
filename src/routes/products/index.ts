@@ -17,3 +17,6 @@ routesProduct.get('/products', productsController.getAll);
 // adit variant of product
 routesProduct.patch('/products/variants/:id', productsController.editVariantById);
 routesProduct.delete('/products/variant/:id', productsController.deleteVariant);
+
+// edit value of variant
+routesProduct.delete('/products/variant/value/:id', productsController.deleteVariantValue);
