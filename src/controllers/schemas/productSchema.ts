@@ -28,6 +28,15 @@ export const addVariants = array().of(
     })
 ).nullable();
 
+export const editVariant = object().shape({
+    price: number().required("O valor é obrigatório"),
+    weight: number().required(),
+    height: number().required(),
+    width: number().required(),
+    length: number().required(),
+    stock: number().required(),
+})
+
 export const addProductSchema = object().shape({
     id_category: string().required(),
     name: string().required("O nome do produto é obrigatório"),
@@ -45,6 +54,7 @@ export const editActiveProductSchema = object().shape({
     active: boolean().required()
 })
 
+export type IEditVariant = InferType<typeof editVariant>;
 export type IAddVariants = InferType<typeof addVariants>;
 export type IAddProducts = InferType<typeof addProductSchema>;
 export type IEditProducts = InferType<typeof editProductSchema>;

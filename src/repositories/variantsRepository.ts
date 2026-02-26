@@ -1,3 +1,4 @@
+import type { IEditVariant } from "../controllers/schemas/productSchema.js";
 import { PrismaFactory } from "../factories/prismaFactory.js";
 import type { Variants } from "../models/Variants.js";
 
@@ -15,5 +16,12 @@ export class VariantsRepository {
                 id_product
             }
         });
+    }
+
+    async editVariant(id: string, data: IEditVariant) {
+        return await PrismaFactory.variants.update({
+            where: { id },
+            data: data
+        })
     }
 }

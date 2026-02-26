@@ -1,3 +1,4 @@
+import type { IEditVariant } from "../controllers/schemas/productSchema.js";
 import type { VariantValue } from "../models/VarianteValue.js";
 import type { Variants } from "../models/Variants.js";
 import type { VariantValuesRepository } from "../repositories/valuesVariantsRepository.js";
@@ -18,7 +19,11 @@ export class VariantsService {
         return await this.variantValueRepository.addMany(data);
     }
 
+    async editVariant(id: string, dado: IEditVariant) {
+        return await this.variantsRepository.editVariant(id, dado);
+    }
+
     async getAll(id_product: string) {
-        return await this.variantsRepository.getAll(id_product)
+        return await this.variantsRepository.getAll(id_product);
     }
 }

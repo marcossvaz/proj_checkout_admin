@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { addProductSchema, editProductSchema } from "./schemas/productSchema.js";
+import { addProductSchema, editProductSchema, editVariant } from "./schemas/productSchema.js";
 import { ProductServiceFactory } from "../factories/productFactory.js";
 import { UuIdValidationSchema } from "../factories/globalSchema.js";
 
@@ -37,6 +37,20 @@ export class ProductsController {
 
             const result = await ProductServiceFactory.editProduct(id, body);
             res.status(200).json(result);
+        } catch (err: any) {
+            res.status(400).json({ error: err.message });
+        }
+    }
+
+    // edit Variant of product
+    async editVariantById(req: Request, res: Response) {
+        try {
+            const idIsValidated = await UuIdValidationSchema.validate(req.params.id);
+            const bodyIsValidated = await editVariant.validate(req.body);
+        
+            const returns = await ProductServiceFactory.editVariant(idIsValidated, bodyIsValidated);
+
+            res.status(200).json(returns);
         } catch (err: any) {
             res.status(400).json({ error: err.message });
         }

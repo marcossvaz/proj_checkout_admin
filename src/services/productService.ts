@@ -1,4 +1,4 @@
-import type { IAddProducts, IAddVariants, IEditProducts } from "../controllers/schemas/productSchema.js";
+import type { IAddProducts, IAddVariants, IEditProducts, IEditVariant } from "../controllers/schemas/productSchema.js";
 import type { Variants } from "../models/Variants.js";
 import type { ProductRepository } from "../repositories/productRepository.js";
 import type { VariantsService } from "./variantsService.js";
@@ -50,7 +50,8 @@ export class ProductService {
             
         };
     }
-
+    
+    // function for order and link variant and variant-value
     orderPayloadAddValueVariant(variantProduct: Variants[], data: IAddVariants) {
         return variantProduct.flatMap((variant) => {
             const variantCorrespondFront = data?.find(item => item.sku === variant.sku);
@@ -65,6 +66,11 @@ export class ProductService {
 
             return [];
         })
+    }
+    
+    // adit variant of product
+    async editVariant(id: string, dado: IEditVariant) {
+        return await this.variantsService.editVariant(id, dado);
     }
 
     async getAll() {
