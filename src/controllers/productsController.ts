@@ -19,13 +19,13 @@ export class ProductsController {
     }
 
     async getAll(_req: Request, res: Response) {
-       try {
-           const result = await ProductServiceFactory.getAll();
+        try {
+            const result = await ProductServiceFactory.getAll();
 
-           res.status(200).json(result);
-       } catch (err: any) {
-           res.status(401).json({ error: err.message });
-       }
+            res.status(200).json(result);
+        } catch (err: any) {
+            res.status(401).json({ error: err.message });
+        }
     }
 
     async editProduct(req: Request<{ id: string }>, res: Response) {
@@ -42,12 +42,26 @@ export class ProductsController {
         }
     }
 
+    async deleteProduct(req: Request<{ id: string }>, res: Response) {
+        try {
+            const { id } = req.params;
+            UuIdValidationSchema.validate(id);
+
+            const result = await ProductServiceFactory.deleteProduct(id);
+
+            res.status(201).json(result);
+        } catch (err: any) {
+            res.status(400).json({ error: err.message });
+        }
+    }
+
+    // ABOUT VARIANT PRODUCT
     // edit Variant of product
     async editVariantById(req: Request, res: Response) {
         try {
             const idIsValidated = await UuIdValidationSchema.validate(req.params.id);
             const bodyIsValidated = await editVariant.validate(req.body);
-        
+
             const returns = await ProductServiceFactory.editVariant(idIsValidated, bodyIsValidated);
 
             res.status(200).json(returns);
@@ -56,14 +70,15 @@ export class ProductsController {
         }
     }
 
-    async deleteProduct(req: Request<{id: string}>, res: Response) {
+    // delete variant
+    async deleteVariant(req: Request, res: Response) {
         try {
-            const { id } = req.params;
-            UuIdValidationSchema.validate(id);
+            const idIsValidated = await UuIdValidationSchema.validate(req.params.id);
 
-            const result = await ProductServiceFactory.deleteProduct(id);
+            const result = await ProductServiceFactory.deleteVariant(idIsValidated);
 
-            res.status(201).json(result);
+            res.status(200).json(result);
+            
         } catch (err: any) {
             res.status(400).json({ error: err.message });
         }

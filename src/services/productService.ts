@@ -88,4 +88,10 @@ export class ProductService {
 
         return productDelete;
     }
+
+    async deleteVariant(id: string) {
+        const variantDelete = await this.variantsService.deleteVariant(id);
+
+        return variantDelete;
+    }
 }

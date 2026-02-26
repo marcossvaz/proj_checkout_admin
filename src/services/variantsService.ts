@@ -23,6 +23,10 @@ export class VariantsService {
         return await this.variantsRepository.editVariant(id, dado);
     }
 
+    async deleteVariant(id: string) {
+        return await this.variantsRepository.deleteVariant(id);
+    }
+
     async getAll(id_product: string) {
         return await this.variantsRepository.getAll(id_product);
     }

@@ -18,6 +18,15 @@ export class VariantsRepository {
         });
     }
 
+    async deleteVariant(id: string) {
+        return await PrismaFactory.variants.update({
+            where: { id },
+            data: {
+                active: false
+            }
+        })
+    }
+
     async editVariant(id: string, data: IEditVariant) {
         return await PrismaFactory.variants.update({
             where: { id },
