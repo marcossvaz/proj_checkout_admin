@@ -2,6 +2,8 @@ import type { Request, Response } from "express";
 import { addProductSchema, editProductSchema, editVariant } from "./schemas/productSchema.js";
 import { ProductServiceFactory } from "../factories/productFactory.js";
 import { UuIdValidationSchema } from "../factories/globalSchema.js";
+import { CategoryServiceFactory } from "../factories/categoryFactory.js";
+import { json } from "node:stream/consumers";
 
 export class ProductsController {
 
@@ -78,7 +80,7 @@ export class ProductsController {
             const result = await ProductServiceFactory.deleteVariant(idIsValidated);
 
             res.status(200).json(result);
-            
+
         } catch (err: any) {
             res.status(400).json({ error: err.message });
         }
@@ -96,4 +98,6 @@ export class ProductsController {
             res.status(400).json({ error: err.message });
         }
     }
+
+
 }
