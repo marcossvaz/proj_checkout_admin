@@ -40,6 +40,20 @@ export class ProductRepository {
         return await PrismaFactory.product.findMany({
             where: {
                 active: true
+            },
+            include: {
+                variants: {
+                    where: {
+                        active: true
+                    },
+                    include: {
+                        value_variants: {
+                            where: {
+                                active: true
+                            }
+                        }
+                    }
+                }
             }
         });
     }
